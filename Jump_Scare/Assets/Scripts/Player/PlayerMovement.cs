@@ -67,6 +67,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Door"))
+        {
+            Debug.Log("Player hit the door");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("VictoryScene");
+        }
+    }
+
     void PlayFootstep()
     {
         if (walkingClips.Length == 0) return;

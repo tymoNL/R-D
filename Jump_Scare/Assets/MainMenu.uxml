@@ -1,9 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
-            <ui:Label text="Game naam" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=9da22bd735decec42a36ddd3c77245ff&amp;type=3#NotInter-Regular&quot;); font-size: 48px; color: rgb(183, 183, 183); -unity-font-style: bold; -unity-text-auto-size: none; -unity-text-align: upper-center; margin-bottom: 16px;"/>
-            <ui:Button text="PLAY" selectable="true" style="margin-top: 16px; margin-bottom: 8px; padding-top: 24px; padding-right: 36px; padding-bottom: 24px; padding-left: 36px;"/>
-            <ui:Button text="QUIT" selectable="true" name="Button" style="padding-top: 24px; padding-right: 36px; padding-bottom: 24px; padding-left: 36px;"/>
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>
