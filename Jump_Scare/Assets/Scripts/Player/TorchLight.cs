@@ -14,6 +14,14 @@ public class TorchLight : MonoBehaviour
     [SerializeField] private float batteryPercentage = 100;
     [SerializeField] private float drainRate = 1f;
 
+    private PlayerHealthScript playerHealth;
+
+
+    void Awake()
+    {
+        playerHealth = FindObjectOfType<PlayerHealthScript>();
+    }
+
     private void Update()
     {
         if (torchLight.enabled && batteryPercentage > 0)
@@ -48,6 +56,8 @@ public class TorchLight : MonoBehaviour
         {
             torchLight.enabled = !torchLight.enabled;
             torchSound.Play();
+
+            playerHealth.SetCalming(torchLight.enabled);
         }
     }
 }

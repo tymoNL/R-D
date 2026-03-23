@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip[] walkingClips;
     [SerializeField] private float stepInterval = 0.5f;
 
+
     private float stepTimer;
 
     public float speed = 5f;

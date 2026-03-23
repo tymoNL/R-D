@@ -11,38 +11,42 @@ public class JumpScareScript : MonoBehaviour
 
     private bool triggered = false;
 
-    void Update()
+    private PlayerHealthScript playerHealth;
+
+    void Start()
     {
+        playerHealth = FindObjectOfType<PlayerHealthScript>();
+    }
+
+    void Update() {
         if (triggered) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance <= triggerDistance && !IsPlayerLooking())
-        {
-            triggered = true;
-            jumpScareObject.SetActive(true);
+        if (distance <= triggerDistance && !IsPlayerLooking()) {
+            TriggerJumpscare();
         }
     }
 
-    bool IsPlayerLooking()
-    {
+    bool IsPlayerLooking() {
         Vector3 dirToEnemy = (transform.position - playerCamera.transform.position).normalized;
         float dot = Vector3.Dot(playerCamera.transform.forward, dirToEnemy);
 
-        if (dot > lookThreshold)
-        {
+        if (dot > lookThreshold) {
             Ray ray = new Ray(playerCamera.transform.position, dirToEnemy);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                if (hit.transform == transform)
-                {
-                    return true;
-                }
+            if (Physics.Raycast(ray, out hit, 100f)) {
+                if (hit.transform == transform) { return true; }
             }
         }
 
         return false;
+    }
+
+    private void TriggerJumpscare() {
+        triggered = true;
+        jumpScareObject.SetActive(true);
+
+        playerHealth.IncreaseHeartRate(50f);
     }
 }
