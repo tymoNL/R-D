@@ -11,11 +11,17 @@ public class JumpScareScript : MonoBehaviour
 
     private bool triggered = false;
 
+    private Vector3 startLocation;
+
     private PlayerHealthScript playerHealth;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
         playerHealth = FindObjectOfType<PlayerHealthScript>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+
+        startLocation = transform.position;
     }
 
     void Update() {
@@ -48,5 +54,20 @@ public class JumpScareScript : MonoBehaviour
         jumpScareObject.SetActive(true);
 
         playerHealth.IncreaseHeartRate(50f);
+
+        transform.position = startLocation;
+        playerMovement.enabled = false;
+
+        StartCoroutine(ResetMonster());
+    }
+
+    private System.Collections.IEnumerator ResetMonster()
+    {
+        yield return new WaitForSeconds(3f);
+
+        jumpScareObject.SetActive(false);
+        triggered = false;
+
+        playerMovement.enabled = true;
     }
 }

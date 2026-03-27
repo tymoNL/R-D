@@ -13,6 +13,14 @@ public class PlayerHealthScript : MonoBehaviour
     [SerializeField] private Volume volume;
     private Vignette vignette;
 
+    void Start()
+    {
+        if (volume != null && volume.profile != null)
+        {
+            volume.profile.TryGet(out vignette);
+        }
+    }
+
     void Update() {
         if (canCalmDown)
         {
@@ -41,18 +49,17 @@ public class PlayerHealthScript : MonoBehaviour
                 heartbeatAudio.Play();
 
             heartbeatAudio.pitch = Mathf.Lerp(1f, 2f, heartRate / 200f);
-            heartbeatAudio.volume = Mathf.Lerp(0.2f, 1f, heartRate / 200f);
+            heartbeatAudio.volume = Mathf.Lerp(0.5f, 2f, heartRate / 200f);
         }
         else { heartbeatAudio.Stop(); }
     }
 
-    void UpdateVignette()
-    {
+    void UpdateVignette() {
         if (vignette == null) return;
 
         float normalized = heartRate / 200f;
 
-        vignette.intensity.value = Mathf.Lerp(0.2f, 0.6f, normalized);
+        vignette.intensity.value = Mathf.Lerp(0.4f, 0.6f, normalized);
     }
 
     public void SetCalming(bool value)

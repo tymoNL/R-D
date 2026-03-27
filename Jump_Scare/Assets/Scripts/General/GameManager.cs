@@ -6,13 +6,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject doorGameObject;
     [SerializeField] private GameObject player;
 
+    public bool canEscape = false;
+
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Hit: " + col.name);
-
-        if (col.CompareTag("Player"))
-        {
-            Debug.Log("Player entered door");
+        if (col.CompareTag("Player") && canEscape) {
             SceneManager.LoadScene("VictoryScene");
         }
     }

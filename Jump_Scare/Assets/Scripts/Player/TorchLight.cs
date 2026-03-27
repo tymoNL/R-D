@@ -12,9 +12,12 @@ public class TorchLight : MonoBehaviour
 
     [SerializeField] private Slider batterySlider;
     [SerializeField] private float batteryPercentage = 100;
-    [SerializeField] private float drainRate = 1f;
+    [SerializeField] private float drainRate = 5f;
+    [SerializeField] private float rechargeRate = 1f;
 
     private PlayerHealthScript playerHealth;
+
+    public bool IsTorchOn => torchLight.enabled;
 
 
     void Awake()
@@ -26,12 +29,25 @@ public class TorchLight : MonoBehaviour
     {
         if (torchLight.enabled && batteryPercentage > 0)
         {
+            // Drain battery
             batteryPercentage -= drainRate * Time.deltaTime;
             batteryPercentage = Mathf.Clamp(batteryPercentage, 0, 100);
 
             if (batteryPercentage <= 0)
             {
                 torchLight.enabled = false;
+
+                if (!torchSound.isPlaying)
+                    torchSound.Play();
+            }
+        }
+        else
+        {
+            // Recharge battery
+            if (batteryPercentage < 100)
+            {
+                batteryPercentage += rechargeRate * Time.deltaTime;
+                batteryPercentage = Mathf.Clamp(batteryPercentage, 0, 100);
             }
         }
 

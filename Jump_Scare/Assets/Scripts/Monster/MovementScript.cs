@@ -13,10 +13,14 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private AudioClip[] walkingClips;
     [SerializeField] private float stepInterval = 0.5f;
 
+    private TorchLight torchLight;
+
     private float stepTimer;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+
+        torchLight = FindObjectOfType<TorchLight>();
     }
 
     void Update() {
@@ -44,7 +48,7 @@ public class MovementScript : MonoBehaviour
             }
         }
 
-        if (isLookingAtEnemy) { agent.isStopped = true; }
+        if (isLookingAtEnemy && torchLight.IsTorchOn) { agent.isStopped = true; }
         else {
             agent.isStopped = false;
             agent.SetDestination(player.position);

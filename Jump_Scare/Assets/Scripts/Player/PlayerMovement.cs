@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float xRotation = 0f;
 
+    public bool canEscape = false;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -70,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.CompareTag("Door"))
+        if (hit.gameObject.CompareTag("Door") && canEscape)
         {
             Debug.Log("Player hit the door");
             UnityEngine.SceneManagement.SceneManager.LoadScene("VictoryScene");
